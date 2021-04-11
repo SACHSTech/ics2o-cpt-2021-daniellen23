@@ -28,7 +28,7 @@ screen_height = 580
 size = [screen_width, screen_height]
 screen = pygame.display.set_mode(size)
  
-pygame.display.set_caption("Danille's Bitcoin Mining Animation")
+pygame.display.set_caption("Danielle's Bitcoin Mining Simulator")
  
 #Loop until the user clicks the close button.
 done = False
@@ -50,14 +50,14 @@ box2_go = False
 
 # Initialize the coordinates of the Miner
 miner_x = 200 
-miner_y = 200 
+miner_y = 280 
 miner_velocity = 5
 jump = False
-jumpcount = 9
+jumpcount = 10
 
 # Location of treasure chest - fixed and not moving
-treasure_x = 675
-treasure_y = 365
+treasure_x = 650
+treasure_y = 310
 
 # Initial coordinates of the Bitcoins to catch
 coin_x = 200
@@ -69,26 +69,27 @@ coin_go = False
 # images are from kenney.ln
 
 # Background of the screen
-background_image = pygame.image.load("dani_factory_background.png").convert()
+background_image = pygame.image.load("background.png").convert()
 background_image = pygame.transform.scale(background_image, (750, 500))
 
 # Bitcoin image - transform scale to resize the image
-bitcoin_image = pygame.image.load("dani_bitcoin_circle.png").convert()
+bitcoin_image = pygame.image.load("bitcoin.png").convert()
 bitcoin_image.set_colorkey(BLACK)
 bitcoin_image = pygame.transform.scale(bitcoin_image, (50, 25))
 
 # Miner image
-miner_image = pygame.image.load("character_female.png").convert()
+miner_image = pygame.image.load("miner.png").convert()
 miner_image.set_colorkey(BLACK)
+miner_image = pygame.transform.scale(miner_image, (90, 80))
 
 # conveyor image
-wheel_image1=pygame.image.load("tanks_tankTracks1.png").convert()
+wheel_image1=pygame.image.load("conveyor.png").convert()
 wheel_image1.set_colorkey(BLACK)
 
 # Treasure chest image to pretend to keep all the coins
-treasure_image = pygame.image.load("dani_treasure_chest.png").convert()
+treasure_image = pygame.image.load("chest.png").convert()
 treasure_image.set_colorkey(BLACK)
-treasure_image = pygame.transform.scale(treasure_image, (75, 75))
+treasure_image = pygame.transform.scale(treasure_image, (100, 100))
 
 # ----------  Fonts and size to use -----------
 font = pygame.font.SysFont('Calibri', 20, True, False)
@@ -125,8 +126,6 @@ while not done:
       miner_x += miner_velocity
     
     # ----- Miner moving up and down arrow keys -----  
-    # the up and down arrow key is not in the instruction
-    # since players can just stay where the coin starts
     if not (jump):
       if keys[pygame.K_UP] and miner_y > miner_velocity:
         miner_y -= miner_velocity
@@ -139,17 +138,16 @@ while not done:
 
     # ------ Miner is jumping and jumpcount = 9 ------
     else:
-      if jumpcount >= -9:
+      if jumpcount >= -10:
         n_1 = 1
         if jumpcount < 0:
           n_1 = -1
-        # calculate to land back
         miner_y -= (jumpcount ** 2) * 0.5 * n_1
         jumpcount -= 1
       # if not jumping set it to false and back to jumpcount 9  
       else: 
         jump = False
-        jumpcount = 9
+        jumpcount = 10
     
     # ----- Coins moving for the miner to catch ------ 
     coin_go = True
@@ -200,19 +198,19 @@ while not done:
     
     # ---- All the TEXT messages ---------
       
-    text2 = font.render("Catch the Bit Coin.", True, WHITE)
+    text2 = font.render("Bitcoin Simulation. Catch as much coin as possible.", True, WHITE)
     screen.blit(text2, [10, 450])
     
-    text8 = font.render("Click LEFT Arrow key to walk to the left.", True, WHITE)
+    text8 = font.render("Press the LEFT Arrow key to walk to the left.", True, WHITE)
     screen.blit(text8, [10, 475])
 
-    text7 = font.render("Click RIGHT Arrow key to walk to the right.", True, WHITE)
+    text7 = font.render("Press the RIGHT Arrow key to walk to the right.", True, WHITE)
     screen.blit(text7, [10, 500])
 
-    text6 = font.render("Click SPACE key to jump, or with RIGHT or LEFT key to side jump.", True, WHITE)
+    text6 = font.render("Press the SPACE key to jump, or with RIGHT or LEFT key to side jump.", True, WHITE)
     screen.blit(text6, [10, 525])
 
-    text9 = font.render("Click UP key to move up and DOWN key to move down.", True, WHITE)
+    text9 = font.render("Press the UP key to move up and DOWN key to move down.", True, WHITE)
     screen.blit(text9, [10, 550])
 
         
